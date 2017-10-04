@@ -1,0 +1,37 @@
+<div align="center">
+<h1>List of people who will be working</h1>
+</div>
+<br>
+<br>
+<table class="table table-sm table-inverse">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Workers Names</th>
+      <th>Working Days</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>
+<h4>
+        {{#each list}}
+          <p>{{this.name}}</p>
+      {{/each}}
+    </h4>
+
+</td>
+<td>
+<h4>
+  {{#each list}}
+    <p>{{this.days}}</P>
+{{/each}}
+</h4>
+</td>
+
+    </tr>
+
+  </tbody>
+</table>

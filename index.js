@@ -38,7 +38,7 @@ app.get("/waitors/:waitorsName", routes.view);
 // a post route to render to the form
 app.post("/waitors/:waitorsName", routes.add);
 
-// app.get("workDays", routes.days);
+app.get("/days", routes.workdays);
 
 
 

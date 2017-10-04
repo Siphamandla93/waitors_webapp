@@ -24,9 +24,22 @@ console.log(shifts);
 res.render("names", {usename:nameOf})
 }
 
+var workdays = function(req, res, next){
+  models.Waitor.find({}, function(err, results){
+    if(err){
+      return next(err)
+    }
+    console.log(workdays);
+    res.render('schedule', {
+      list: results
+    });
+  })
+}
+
 return{
   add,
-  view
+  view,
+  workdays
 }
 
 
