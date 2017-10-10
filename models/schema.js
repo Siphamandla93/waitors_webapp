@@ -4,8 +4,8 @@ mongoose.connect(MongoUrl);
 mongoose.Promise = global.Promise
 
   var WaiterSchema = mongoose.Schema({
-    name:String,
-    days: []
+    days: Array,
+    name:String
   });
 
 WaiterSchema.index({name:1}, {unique:true});

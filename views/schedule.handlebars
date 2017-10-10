@@ -1,27 +1,93 @@
+<style>
+  h1{
+
+    color:red;
+  }
+
+
+
+</style>
+
 <div align="center">
     <h1>List of people who will be working</h1>
 </div>
 <br>
 <br>
+<form class="" action="index.html" method="post">
+
 <table class="table table-sm table-inverse">
     <thead>
         <tr>
 
             <th>Monday</th>
             <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
         </tr>
     </thead>
     <tbody>
-      {{#each monday}}
-      <tr>
-        <td>{{this.name}}</td>
-      </tr>
+
+         <td class='{{colorM}}' style="background-color: {{colorM}}">
+        {{#each Monday}}
+
+      <li>{{this.name}}</li>
+
+        {{/each}}
+      </td>
+
+
+      <td style="background-color: {{colorT}}">
+        {{#each Tuesday}}
+        <li>{{this.name}}</li>
+
       {{/each}}
+    </td>
 
-      <!-- {{#each tuesday}}
-      <tr>
-        <td>{{this.name}}</td>
-      </tr>
-      {{/each}} -->
+  <td style="background-color: {{colorW}}">
+   {{#each Wednesday}}
 
-     </tbody>
+ <li>{{this.name}}</li>
+
+   {{/each}}
+ </td>
+
+ <td style="background-color: {{colorTH}}">
+{{#each Thursday}}
+
+<li>{{this.name}}</li>
+
+{{/each}}
+</td>
+
+<td style="background-color: {{colorF}}">
+{{#each Friday}}
+
+<li>{{this.name}}</li>
+
+{{/each}}
+</td>
+
+<td style="background-color: {{colorS}}">
+{{#each Saturday}}
+
+<li>{{this.name}}</li>
+
+{{/each}}
+</td>
+
+<td style="background-color: {{colorSU}}">
+{{#each Sunday}}
+
+<li>{{this.name}}</li>
+
+{{/each}}
+</td>
+</tbody>
+
+</form>
+
+</div>
+      <!-- <li style="color:white">{{this}}</li> -->
