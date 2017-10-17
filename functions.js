@@ -1,34 +1,73 @@
 module.exports = function(models) {
 
     var view = function(req, res, next) {
+
+        var dayMap = {};
+        models.Waitor.findOne({
+            name: req.params.waitorsName
+        }, function(err, results) {
+            if (results) {
+                daysObject(results)
+                console.log(req.params.waitorsName);
+            }
+
+
+
+        });
+
         var nameOf = req.params.waitorsName;
         res.render("names", {
-            usename: nameOf
+            usename: nameOf,
+            days: dayMap
         })
 
+
+        var daysObject = function(shifts) {
+            for (var i = 0; i < shifts.days.length; i++) {
+                if (dayMap[shifts.days[i]] === undefined) {
+                    // dayMap[shift.days[i]] = 0;
+                    dayMap[shifts.days[i]] = "checked";
+                }
+            }
+            return dayMap
+        }
     }
+
+
 
     var add = function(req, res, next) {
         var nameOf = req.params.waitorsName;
         var shifts = req.body.week
+
         models.Waitor.create({
             days: shifts,
             name: nameOf
         }, function(err, results) {
             if (err) {
-                return next(err)
+                if (err.code === 11000) {
+
+                    console.log("asa");
+
+                }
+            } else {
+
+                res.render("names", {
+                    usename: nameOf,
+                    weekDays: listDays
+                })
             }
 
         })
+        req.flash('error', 'You have succesfuly updated your days thank you');
         var listDays = req.body.week
         // res.render("names", {
         // })
-        console.log(shifts);
-        res.render("names", {
-            usename: nameOf,
-            days: listDays
-        })
+        // console.log(shifts);
+
     }
+
+
+
     var workdays = function(req, res, next) {
 
 
@@ -39,6 +78,7 @@ module.exports = function(models) {
         var friday = []
         var saturday = []
         var sunday = []
+
 
         models.Waitor.find({}, function(err, result) {
             if (err) {
@@ -102,15 +142,16 @@ module.exports = function(models) {
 
 
             if (monday.length < 3) {
-                color[0].monColor
+                color[0].monColor = 'orange'
             } else if (monday.length === 3) {
                 color[0].monColor = 'green'
             } else if (monday.length > 3) {
                 color[0].monColor = 'red'
             }
 
+
             if (tuesday.length < 3) {
-                color[1].tueColor
+                color[1].tueColor = 'orange'
             } else if (tuesday.length === 3) {
                 color[1].tueColor = 'green'
             } else if (tuesday.length > 3) {
@@ -118,7 +159,7 @@ module.exports = function(models) {
             }
 
             if (wednesday.length < 3) {
-                color[2].wedColor
+                color[2].wedColor = 'orange'
             } else if (wednesday.length === 3) {
                 color[2].wedColor = 'green'
             } else if (wednesday.length > 3) {
@@ -127,7 +168,7 @@ module.exports = function(models) {
 
 
             if (thursday.length < 3) {
-                color[3].thuColor
+                color[3].thuColor = 'orange'
             } else if (thursday.length === 3) {
                 color[3].thuColor = 'green'
             } else if (thursday.length > 3) {
@@ -137,7 +178,7 @@ module.exports = function(models) {
 
 
             if (friday.length < 3) {
-                color[4].friColor
+                color[4].friColor = 'orange'
             } else if (friday.length === 3) {
                 color[4].friColor = 'green'
             } else if (friday.saturdayth > 3) {
@@ -146,7 +187,7 @@ module.exports = function(models) {
 
 
             if (saturday.length < 3) {
-                color[5].satColor
+                color[5].satColor = 'orange'
             } else if (saturday.length === 3) {
                 color[5].satColor = 'green'
             } else if (saturday.length > 3) {
@@ -155,7 +196,7 @@ module.exports = function(models) {
 
 
             if (sunday.length < 3) {
-                color[6].sunColor
+                color[6].sunColor = 'orange'
             } else if (sunday.length === 3) {
                 color[6].sunColor = 'green'
             } else if (sun.length > 3) {
@@ -190,7 +231,7 @@ module.exports = function(models) {
         });
 
 
-}
+    }
 
 
     return {
