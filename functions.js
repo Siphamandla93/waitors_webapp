@@ -1,36 +1,36 @@
 module.exports = function(models) {
 
+  var daysObject = function(shifts) {
+      var dayMap = {};
+      for (var i = 0; i < shifts.days.length; i++) {
+          if (dayMap[shifts.days[i]] === undefined) {
+              // dayMap[shift.days[i]] = 0;
+              dayMap[shifts.days[i]] = "checked";
+          }
+      }
+      return dayMap
+  }
+
     var view = function(req, res, next) {
 
-        var dayMap = {};
+
         models.Waitor.findOne({
             name: req.params.waitorsName
         }, function(err, results) {
+            var dayShifts = {};
             if (results) {
-                daysObject(results)
+                dayShifts = daysObject(results)
                 console.log(req.params.waitorsName);
             }
 
-
+            var nameOf = req.params.waitorsName;
+            res.render("names", {
+                usename: nameOf,
+                days: dayShifts
+            })
 
         });
 
-        var nameOf = req.params.waitorsName;
-        res.render("names", {
-            usename: nameOf,
-            days: dayMap
-        })
-
-
-        var daysObject = function(shifts) {
-            for (var i = 0; i < shifts.days.length; i++) {
-                if (dayMap[shifts.days[i]] === undefined) {
-                    // dayMap[shift.days[i]] = 0;
-                    dayMap[shifts.days[i]] = "checked";
-                }
-            }
-            return dayMap
-        }
     }
 
 
